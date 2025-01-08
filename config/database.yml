@@ -1,0 +1,18 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: admin
+  password: scrape-app-db
+  host:  scrape-app-db.cne48k68e8sm.ap-southeast-2.rds.amazonaws.com
+  database: scrape
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+

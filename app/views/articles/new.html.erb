@@ -1,0 +1,39 @@
+<header>
+  <h1>スクレイピングアプリケーション</h1>
+    <div class="form-container">
+      <%= form_with url: articles_path, method: :post, local: true do %>
+        <%= text_field_tag :url, nil, placeholder: "スクレイピングするURLを入力", class: "input-box" %>
+        <%= submit_tag "実行", class: "submit-btn" %>
+      <% end %>
+    </div>
+</header>
+
+<main>
+  <% if flash[:alert] %>
+    <p class="alert"><%= flash[:alert] %></p>
+  <% end %>
+
+<section>
+    <table>
+      <thead>
+        <tr>
+            <th>タイトル</th>
+            <th>リスクスコア</th>
+            <th>要約</th>
+            <th>本文</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @articles.each do |article| %>
+          <tr>
+            <td><strong><%= article.title %></strong></td>
+            <td class="center-cell"><%= article.risk_score %></td>
+            <td><%= article.summary %></td>
+            <td><%= article.content.delete('["]').gsub(",", "<br><br>").html_safe %></td> <!-- json形式で保存されているため、[""]を削除し、","を,""<br><br>"に変換して空行を挿入 -->
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+</main>
+    
