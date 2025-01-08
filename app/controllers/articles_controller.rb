@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-    http_basic_authenticate_with name: "インターン", password: "ukaritai"
+    http_basic_authenticate_with name: "インターン", password: "ganbarimasu"
     require "selenium-webdriver"
     require "nokogiri"
     require "openai"
