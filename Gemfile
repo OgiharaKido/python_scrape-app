@@ -69,4 +69,4 @@ gem "dotenv-rails"
 
 gem "ruby-openai"
 
-gem "http"
+gem "faraday"
