@@ -1,7 +1,7 @@
 <header>
   <h1>スクレイピングアプリケーション</h1>
     <div class="form-container">
-      <%= form_with url: articles_path, method: :post, local: true do %>
+      <%= form_with url: articles_path do %>
         <%= text_field_tag :url, nil, placeholder: "スクレイピングするURLを入力", class: "input-box" %>
         <%= submit_tag "実行", class: "submit-btn" %>
       <% end %>
@@ -9,6 +9,7 @@
 </header>
 
 <main>
+
   <% if flash[:alert] %>
     <p class="alert"><%= flash[:alert] %></p>
   <% end %>
@@ -29,11 +30,10 @@
             <td><strong><%= article.title %></strong></td>
             <td class="center-cell"><%= article.risk_score %></td>
             <td><%= article.summary %></td>
-            <td><%= article.content.delete('["]').gsub(",", "<br><br>").html_safe %></td> <!-- json形式で保存されているため、[""]を削除し、","を,""<br><br>"に変換して空行を挿入 -->
+            <td><%= JSON.parse(article.content).join("<br><br>").html_safe rescue article.content %></td> <!-- json形式で保存されているため、[""]を削除し、","を,""<br><br>"に変換して空行を挿入 -->
           </tr>
         <% end %>
       </tbody>
     </table>
   </section>
 </main>
-    
